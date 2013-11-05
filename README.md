@@ -1,0 +1,1 @@
+Learning the basics of ubuntu command line and python. 
