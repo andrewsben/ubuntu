@@ -6,9 +6,11 @@ bankroll = 1000
 while deck.count > 3 and pot > 0 and bankroll > 0:
 	import random
 
-	left = random.shuffle(deck)
-	right = random.shuffle(deck)
-	middle = random.shuffle(deck)
+	random.shuffle(deck)
+
+	left = deck.pop()
+	right = deck.pop()
+	middle = deck.pop()
 
 	print "--------------------------------------------------"
 	print "Pot = $%d\nLeft: %s \tRight: %s" % (pot, left, right)
@@ -27,15 +29,13 @@ while deck.count > 3 and pot > 0 and bankroll > 0:
 
 	if (middle < left and middle > right) or (middle > left and middle < right):
 		pot = pot - bet
-		bankroll = bankroll + bet
+		bankroll = bankroll + ( bet * 2)
 		print "you win $%d" % bet
 		print "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 		print "Pot = $%d, Bankroll = $%d" % (pot, bankroll)
 		print "Thanks for playing!"
 		print "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 	else:
-		pot = pot + bet
-		bankroll = bankroll - bet
 		print "you lost :("
 		print "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxx"
 		print "Pot = $%d, Bankroll = $%d" % (pot, bankroll)
