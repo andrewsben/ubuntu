@@ -29,14 +29,19 @@ while pot > 0 and bankroll > 0:
 	while len(deck) >= 3:
 		left = deck.pop()
 		right = deck.pop()
-		middle = deck.pop()
 
 		print "\n\nXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
 		print "Pot = $%d \tBankroll = $%d \nLeft: %s \tRight: %s\n" % (pot, bankroll, left, right)
 
 		print "--------------------------------------------------"
-		print "Type the amount you want to bet (enter 0 to PASS):"
-		bet = int(raw_input())
+
+		while True:
+			try:
+				bet = int(raw_input("Type the amount you want to bet (enter 0 to PASS): "))
+				break
+			except ValueError:
+				print "Oops, that's not a valid bet. Try again..."
+
 		print "--------------------------------------------------"
 
 		pot = pot + bet
@@ -44,18 +49,23 @@ while pot > 0 and bankroll > 0:
 
 		print "The pot is $%d and your bankroll is: $%d" % (pot, bankroll)
 
-		print "Your card: %s" % (middle)
-
-		if (middle < left and middle > right) or (middle > left and middle < right):
-			pot = pot - ( bet * 2 )
-			bankroll = bankroll + ( bet * 2 )
-			print "----------\n|        |\n|  WIN!  |\n|        |\n----------"
-			print "Bankroll = $%d" % bankroll
-			print "Thanks for playing!"
-			print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\n"
+		if bet == 0:
+			print "PASSED - thanks for playing!"
+			print "--------------------------------------------------"
 		else:
-			print "\t\t----------\n\t\t|        |\n\t\t|  LOST  |\n\t\t|        |\n\t\t----------"
-			print "Bankroll = $%d" % bankroll
-			print "Thanks for playing!"
-			print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\n"
+			middle = deck.pop()
+			print "Your card: %s" % (middle)
+
+			if (middle < left and middle > right) or (middle > left and middle < right):
+				pot = pot - ( bet * 2 )
+				bankroll = bankroll + ( bet * 2 )
+				print "----------\n|        |\n|  WIN!  |\n|        |\n----------"
+				print "Bankroll = $%d" % bankroll
+				print "Thanks for playing!"
+				print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\n"
+			else:
+				print "\t\t----------\n\t\t|        |\n\t\t|  LOST  |\n\t\t|        |\n\t\t----------"
+				print "Bankroll = $%d" % bankroll
+				print "Thanks for playing!"
+				print "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX\n\n"
 
