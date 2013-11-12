@@ -2,11 +2,18 @@
 
 import random
 
-def get_bet():
+def get_bet(pot, bankroll):
 	while True:
 		try:
 			current_bet = int(raw_input("Bet (enter 0 to PASS): "))
-			break
+			if current_bet <= pot and current_bet <= bankroll:
+				break
+			elif current_bet > pot:
+				print "Bet exceded pot, max bet is %s, setting bet to %s" % (pot, pot)
+				current_bet = pot
+				break
+			else:
+				print "Bet not correct. Try again"
 		except ValueError:
 			print "Oops. Not a valid bet."
 	return current_bet
@@ -46,7 +53,7 @@ while pot > 0 and bankroll > 0:
 
 	print "--------------------------------------------------"
 
-	bet = get_bet()
+	bet = get_bet(pot, bankroll)
 
 	print "--------------------------------------------------"
 
