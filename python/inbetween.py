@@ -2,6 +2,14 @@
 
 import random
 
+def get_bet():
+	while True:
+		try:
+			current_bet = int(raw_input("Bet (enter 0 to PASS): "))
+			break
+		except ValueError:
+			print "Oops. Not a valid bet."
+	return current_bet
 
 # deck = [
 	# "2H","3H","4H","5H","6H","7H","8H","9H","10H","JH","QH","KH","AH",
@@ -29,7 +37,7 @@ while pot > 0 and bankroll > 0:
 		deck = starting_deck[:]
 		print "Shuffling the deck!"
 		random.shuffle(deck)
-		
+
 	left = deck.pop()
 	right = deck.pop()
 
@@ -38,12 +46,7 @@ while pot > 0 and bankroll > 0:
 
 	print "--------------------------------------------------"
 
-	while True:
-		try:
-			bet = int(raw_input("Type the amount you want to bet (enter 0 to PASS): "))
-			break
-		except ValueError:
-			print "Oops, that's not a valid bet. Try again..."
+	bet = get_bet()
 
 	print "--------------------------------------------------"
 
